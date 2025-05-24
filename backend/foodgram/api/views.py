@@ -38,7 +38,7 @@ class UserViewSet(UserDjoserViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_permissions(self):
-        """Переопределение разрешений для метода me"""
+        '''Переопределение разрешений для метода me'''
         if self.action == 'me':
             return [IsAuthenticated()]
         return super().get_permissions()

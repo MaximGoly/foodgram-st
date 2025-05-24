@@ -238,7 +238,7 @@ class RecipeCreateUpdateSerializer(serializers.ModelSerializer):
         return data
 
     def validate_image(self, image):
-        """Функция валидации картинки."""
+        '''Функция валидации картинки.'''
         if not image:
             raise serializers.ValidationError('Картинка не может быть пустой')
         return image

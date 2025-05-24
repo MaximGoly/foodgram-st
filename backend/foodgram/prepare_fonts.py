@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-"""
+'''
 Script to download DejaVuSans font for PDF generation.
 Run this script before starting the application.
-"""
+'''
 import os
 import urllib.request
 
 
 def download_dejavu_sans():
-    """Download the DejaVuSans.ttf font if it doesn't exist."""
+    '''Загрузка шрифта'''
     font_dir = 'fonts'
     font_path = os.path.join(font_dir, 'DejaVuSans.ttf')
     if not os.path.exists(font_dir):
