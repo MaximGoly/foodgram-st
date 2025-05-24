@@ -7,7 +7,7 @@ from recipes.models import Ingredient
 
 
 class Command(BaseCommand):
-    """Команда для импорта ингредиентов из CSV или JSON файла."""
+    '''Команда для импорта ингредиентов из CSV или JSON файла.'''
     help = 'Импортирует ингредиенты из CSV или JSON файла'
 
     def add_arguments(self, parser):
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         )
 
     def import_from_csv(self, file_path):
-        """Импортирует ингредиенты из CSV файла."""
+        '''Импортирует ингредиенты из CSV файла.'''
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 reader = csv.reader(file)
@@ -63,7 +63,7 @@ class Command(BaseCommand):
             )
 
     def import_from_json(self, file_path):
-        """Импортирует ингредиенты из JSON файла."""
+        '''Импортирует ингредиенты из JSON файла.'''
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)

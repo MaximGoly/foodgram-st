@@ -39,7 +39,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
     class Meta:
         model = User
         fields = (
-            'email', 'username', 'first_name', 'last_name', 'password'
+            'id', 'email', 'username', 'first_name', 'last_name', 'password'
         )
 
 
@@ -201,7 +201,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 class RecipeCreateUpdateSerializer(serializers.ModelSerializer):
     '''Класс-сериализатор для создания и обновления рецептов.'''
     ingredients = RecipeIngredientCreateSerializer(many=True)
-    image = Base64ImageField()
+    image = Base64ImageField(required=True)
     author = UserSerializer(read_only=True)
 
     class Meta:
@@ -236,6 +236,12 @@ class RecipeCreateUpdateSerializer(serializers.ModelSerializer):
             )
 
         return data
+
+    def validate_image(self, image):
+        '''Функция валидации картинки.'''
+        if not image:
+            raise serializers.ValidationError('Картинка не может быть пустой')
+        return image
 
     def create_ingredients(self, ingredients, recipe):
         '''Метод создания ингредиентов
