@@ -34,7 +34,7 @@ def download_dejavu_sans():
                             break
                     if font_file_in_zip:
                         # Извлекаем файл шрифта
-                        with (zip_ref.open(font_file_in_zip) as source_file, 
+                        with (zip_ref.open(font_file_in_zip) as source_file,
                               open(font_path, 'wb') as target_file):
                             target_file.write(source_file.read())
                     else:
