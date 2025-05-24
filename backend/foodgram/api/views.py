@@ -62,7 +62,6 @@ class UserViewSet(UserDjoserViewSet):
     def subscribe(self, request, id=None):
         '''Метод подписки на автора'''
         author = get_object_or_404(User, pk=id)
-
         if request.method == 'POST':
             data = {'user': request.user.id, 'author': author.id}
             serializer = SubscriptionSerializer(
@@ -78,9 +77,12 @@ class UserViewSet(UserDjoserViewSet):
                 status=status.HTTP_201_CREATED
             )
 
-        get_object_or_404(
-            Subscription, user=request.user, author=author
-        ).delete()
+        subscription = Subscription.objects.filter(user=request.user,
+                                                   author=author).first()
+        if subscription is None:
+            return Response({'detail': 'Подписки не существует'},
+                            status=status.HTTP_400_BAD_REQUEST)
+        subscription.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(
