@@ -12,6 +12,7 @@ services:
 
   backend:
     container_name: backend
+    image: macsimgolishev/foodgram-backend:latest
     build: ../backend
     restart: always
     depends_on:
