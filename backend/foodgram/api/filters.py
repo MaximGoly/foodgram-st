@@ -4,7 +4,7 @@ from recipes.models import Ingredient, Recipe
 
 
 class IngredientFilter(filters.FilterSet):
-    '''Класс фильтра для ингредиентов'''
+    """Класс фильтра для ингредиентов"""
     name = filters.CharFilter(
         field_name='name',
         # lookup_expr='icontains'
@@ -17,7 +17,7 @@ class IngredientFilter(filters.FilterSet):
 
 
 class RecipeFilter(filters.FilterSet):
-    '''Класс фильтра для рецептов'''
+    """Класс фильтра для рецептов"""
     is_favorited = filters.BooleanFilter(
         method='filter_is_favorited'
     )
@@ -33,14 +33,14 @@ class RecipeFilter(filters.FilterSet):
         fields = ('author', 'is_favorited', 'is_in_shopping_cart')
 
     def filter_is_favorited(self, queryset, name, value):
-        '''Метод фильтрации рецептов по наличию их в избранных'''
+        """Метод фильтрации рецептов по наличию их в избранных"""
         user = self.request.user
         if value and user.is_authenticated:
             return queryset.filter(in_favorites__user=user)
         return queryset
 
     def filter_is_in_shopping_cart(self, queryset, name, value):
-        '''Метод фильтрации рецептов по наличию их в списке покупок'''
+        """Метод фильтрации рецептов по наличию их в списке покупок"""
         user = self.request.user
         if value and user.is_authenticated:
             return queryset.filter(in_shopping_cart__user=user)

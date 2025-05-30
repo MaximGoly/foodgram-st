@@ -1,11 +1,11 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from users.models import User
 
 
 class Ingredient(models.Model):
-    '''Модель ингредиента.'''
+    """Модель ингредиента."""
     name = models.CharField(
         max_length=200,
         verbose_name='Название'
@@ -31,7 +31,7 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
-    '''Модель рецепта.'''
+    """Модель рецепта."""
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -55,7 +55,7 @@ class Recipe(models.Model):
         verbose_name='Ингредиенты'
     )
     cooking_time = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1)],
+        validators=[MinValueValidator(1), MaxValueValidator(32000)],
         verbose_name='Время приготовления (в минутах)'
     )
     pub_date = models.DateTimeField(
@@ -73,7 +73,7 @@ class Recipe(models.Model):
 
 
 class RecipeIngredient(models.Model):
-    '''Модель, связывающая рецепт и ингредиент.'''
+    """Модель, связывающая рецепт и ингредиент."""
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,
@@ -86,7 +86,7 @@ class RecipeIngredient(models.Model):
         verbose_name='Ингредиент'
     )
     amount = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1)],
+        validators=[MinValueValidator(1), MaxValueValidator(32000)],
         verbose_name='Количество'
     )
 
@@ -107,7 +107,7 @@ class RecipeIngredient(models.Model):
 
 
 class Favorite(models.Model):
-    '''Модель избранных рецептов.'''
+    """Модель избранных рецептов."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -136,7 +136,7 @@ class Favorite(models.Model):
 
 
 class ShoppingCart(models.Model):
-    '''Модель списка покупок.'''
+    """Модель списка покупок."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -1,0 +1,8 @@
+
+class FontConst():
+    SIZE_FONT_REG = 14
+    SIZE_FONT = 12
+    SET_FONT_X_TITLE = 200
+    SET_FONT_Y_TITLE = 800
+    Y_POSITION = 750
+    X_POSITION = 50

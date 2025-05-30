@@ -4,7 +4,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    '''Модель пользователя.'''
+    """Модель пользователя."""
     username_validator = RegexValidator(
         regex=r'^[\w.@+-]+$',
         message='Имя пользователя может содержать только буквы, цифры, '
@@ -50,7 +50,7 @@ class User(AbstractUser):
 
 
 class Subscription(models.Model):
-    '''Модель подписки на авторов.'''
+    """Модель подписки на авторов."""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -6,7 +6,7 @@ from .models import User, Subscription
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    '''Панель управления пользователями'''
+    """Панель управления пользователями"""
     list_display = (
         'id', 'username', 'email', 'first_name', 'last_name',
         'is_active', 'is_staff'
@@ -18,7 +18,7 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
-    '''Панель управления подписками'''
+    """Панель управления подписками"""
     list_display = ('id', 'user', 'author')
     list_filter = ('user', 'author')
     search_fields = ('user__username', 'author__username')
