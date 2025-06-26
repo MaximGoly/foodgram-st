@@ -1,3 +1,7 @@
+class MyConsts():
+    MIN_VALUE_VALIDATOR = 1
+    MAX_VALUE_VALIDATOR = 32000
+
 
 class FontConst():
     SIZE_FONT_REG = 14
@@ -6,3 +10,5 @@ class FontConst():
     SET_FONT_Y_TITLE = 800
     Y_POSITION = 750
     X_POSITION = 50
+    Y_POSITION_UPDATE = 25
+    NEW_PAGE_CHECK = 50

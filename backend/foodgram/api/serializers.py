@@ -7,10 +7,12 @@ from rest_framework.validators import UniqueTogetherValidator
 from rest_framework import status
 from rest_framework.fields import ReadOnlyField
 
+
 from recipes.models import (
     Favorite, Ingredient, Recipe, RecipeIngredient, ShoppingCart
 )
 from users.models import Subscription, User
+from consts import MyConsts
 
 
 class UserSerializer(DjoserUserSerializer):
@@ -159,6 +161,9 @@ class RecipeIngredientCreateSerializer(serializers.ModelSerializer):
     id = serializers.PrimaryKeyRelatedField(
         queryset=Ingredient.objects.all()
     )
+    amount = serializers.IntegerField(
+        min_value=MyConsts.MIN_VALUE_VALIDATOR,
+        max_value=MyConsts.MAX_VALUE_VALIDATOR)
 
     class Meta:
         model = RecipeIngredient
@@ -174,6 +179,10 @@ class RecipeSerializer(serializers.ModelSerializer):
     image = Base64ImageField()
     is_favorited = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
+
+    cooking_time = serializers.IntegerField(
+        min_value=MyConsts.MIN_VALUE_VALIDATOR,
+        max_value=MyConsts.MAX_VALUE_VALIDATOR)
 
     class Meta:
         model = Recipe

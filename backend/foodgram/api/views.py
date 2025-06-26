@@ -27,7 +27,7 @@ from .serializers import (
     SubscriptionSerializer,
     UserSerializer,
 )
-from .consts import FontConst
+from consts import FontConst
 
 
 class UserViewSet(UserDjoserViewSet):
@@ -275,12 +275,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 FontConst.X_POSITION, y_position,
                 f"{name} — {amount} {measurement_unit}"
             )
-            y_position -= 25
+            y_position -= FontConst.Y_POSITION_UPDATE
             # Проверка, нужна ли новая страница
-            if y_position <= 50:
+            if y_position <= FontConst.NEW_PAGE_CHECK:
                 p.showPage()
                 p.setFont('DejaVuSans', FontConst.SIZE_FONT)
-                y_position = 800
+                y_position = FontConst.SET_FONT_Y_TITLE
         p.showPage()
         p.save()
         return response

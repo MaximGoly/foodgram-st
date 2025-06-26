@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from users.models import User
+from consts import MyConsts
 
 
 class Ingredient(models.Model):
@@ -55,7 +56,8 @@ class Recipe(models.Model):
         verbose_name='Ингредиенты'
     )
     cooking_time = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(32000)],
+        validators=[MinValueValidator(MyConsts.MIN_VALUE_VALIDATOR),
+                    MaxValueValidator(MyConsts.MAX_VALUE_VALIDATOR)],
         verbose_name='Время приготовления (в минутах)'
     )
     pub_date = models.DateTimeField(
@@ -86,7 +88,8 @@ class RecipeIngredient(models.Model):
         verbose_name='Ингредиент'
     )
     amount = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(32000)],
+        validators=[MinValueValidator(MyConsts.MIN_VALUE_VALIDATOR),
+                    MaxValueValidator(MyConsts.MAX_VALUE_VALIDATOR)],
         verbose_name='Количество'
     )
 
